@@ -38,20 +38,20 @@
       </li>
 
       <li class="has-submenu" 
-          [class.open]="isRegisterMenuOpen" 
-          [class.parent-active]="isRegisterParentActive"
+          [class.open]="isViewMenuOpen" 
+          [class.parent-active]="isViewParentActive"
           title="Cadastrar">
-        <a (click)="toggleRegisterMenu()">
+        <a (click)="toggleViewMenu()">
           <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon">
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
             <path d="M9 12h6" /><path d="M12 9v6" />
           </svg>
-          <span class="nav-text">Cadastrar</span>
+          <span class="nav-text">Visualizar</span>
         </a>
-        <ul class="submenu" [class.open]="isRegisterMenuOpen">
+        <ul class="submenu" [class.open]="isViewMenuOpen">
           <li [class.active-submenu-item]="activeSubMenuItem === 'trucks'"><a (click)="goToCaminhoes()">Caminhões</a></li>
-          <li [class.active-submenu-item]="activeSubMenuItem === 'loads'"><a (click)="goToCargas()">Cargas</a></li>
+          <li [class.active-submenu-item]="activeSubMenuItem === 'loads'"><a (click)="goToLoad()">Cargas</a></li>
           <li [class.active-submenu-item]="activeSubMenuItem === 'clients'"><a (click)="goToClientes()">Clientes</a></li>
         </ul>
       </li>
@@ -81,6 +81,27 @@
           <span class="nav-text">Notas Fiscais</span>
         </a>
       </li>
+      <div class="adm-part" id="adm-part">
+        <hr style="color: azure;">
+        <h6 style="color: azure; padding-left: 2rem; font-weight: bold;">Administração</h6>
+        <li class="has-submenu" 
+        [class.open]="isRegisterMenuOpen" 
+        [class.parent-active]="isRegisterParentActive"
+        title="Cadastrar">
+        <a (click)="toggleRegisterMenu()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+            <path d="M9 12h6" /><path d="M12 9v6" />
+          </svg>
+          <span class="nav-text">Itens da Empresa</span>
+        </a>
+        <ul class="submenu" [class.open]="isRegisterMenuOpen">
+          <li [class.active-submenu-item]="activeSubMenuItem === 'trucks'"><a (click)="goToCaminhoes()">Caminhões</a></li>
+          <li [class.active-submenu-item]="activeSubMenuItem === 'clients'"><a (click)="goToClientes()">Usuarios</a></li>
+        </ul>
+      </li>
+    </div>
     </ul>
   </nav>
 

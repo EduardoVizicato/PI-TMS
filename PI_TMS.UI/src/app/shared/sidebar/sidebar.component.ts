@@ -1,26 +1,34 @@
 import { Component, HostListener, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { AuthTokenService } from '../../_guard/service/auth-token.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
+  imports: [
+    CommonModule,
+    RouterModule,
+  ],
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
   @Input() isCollapsed: boolean = false;
   @Output() collapseChange = new EventEmitter<boolean>();
   @Output() registerMenuInteracted = new EventEmitter<boolean>();
+  @Output() viewMenuInteracted = new EventEmitter<boolean>();
 
   isRegisterMenuOpen: boolean = false;
+  isViewMenuOpen: boolean = false;
   activeSubMenuItem: string | null = null;
   isDashboardActive: boolean = false;
   isTravelsActive: boolean = false;
   isFreightActive: boolean = false;
   isNfStorageActive: boolean = false;
   isRegisterParentActive: boolean = false;
-  
+  isViewParentActive: boolean = false;
+
   constructor(private router: Router, private authTokenService: AuthTokenService) {}
   
   ngOnInit(): void {
@@ -33,6 +41,19 @@ export class SidebarComponent implements OnInit {
       }
     });
     this.updateActiveState();
+  }
+
+  toggleViewMenu(): void {
+    if (this.isCollapsed && !this.isViewMenuOpen) {
+      this.collapseChange.emit(false);
+      this.isViewMenuOpen = true;
+      this.viewMenuInteracted.emit(true);
+    } else if (!this.isCollapsed) {
+      this.isViewMenuOpen = !this.isViewMenuOpen;
+      if (!this.isViewMenuOpen) {
+        this.viewMenuInteracted.emit(false);
+      }
+    }
   }
 
   toggleRegisterMenu(): void {
@@ -55,6 +76,7 @@ export class SidebarComponent implements OnInit {
     this.isFreightActive = false;
     this.isNfStorageActive = false;
     this.isRegisterParentActive = false;
+    this.isViewParentActive = false;
     this.activeSubMenuItem = null;
 
     if (currentUrl === '/dashboard') { 
@@ -105,8 +127,8 @@ export class SidebarComponent implements OnInit {
     this.navigate(['/register/trucks']); 
   }
   
-  goToCargas(): void { 
-    this.navigate(['/register/loads']); 
+  goToLoad(): void { 
+    this.navigate(['/view/load']); 
   }
   
   goToClientes(): void { 

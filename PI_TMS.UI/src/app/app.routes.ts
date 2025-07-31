@@ -14,6 +14,7 @@ import { NfStorageComponent } from './pages/nf-storage/nf-storage.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { UserInfoComponent } from './pages/user-info/user-info.component';
 import { Title } from 'chart.js';
+import { LoadComponent } from './pages/view/load/load.component';
 
 export enum Roles {
     ADM = 'ADM',
@@ -86,9 +87,9 @@ export const routes: Routes = [
                 title: 'Caminhões'
             },
             {
-                path: 'register/loads',
-                component: LoadsComponent,
-                canActivate: [authGuard], data: { breadcrumb: 'Loads', title: 'Cadastro de Cargas', roles: [Roles.ADM] },
+                path: 'view/load',
+                component: LoadComponent,
+                canActivate: [authGuard], data: { breadcrumb: 'Load', title: 'Cadastro de Cargas', roles: [Roles.ADM, Roles.FUNCIONARIO] },
                 title: 'Cargas'
             },
             {
